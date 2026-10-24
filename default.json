@@ -1,0 +1,22 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:best-practices", "schedule:weekly", "group:allNonMajor"],
+  "ignorePresets": ["security:minimumReleaseAgeNpm"],
+  "timezone": "Asia/Tokyo",
+  "minimumReleaseAge": "1 day",
+  "prConcurrentLimit": 2,
+  "platformAutomerge": false,
+  "packageRules": [
+    {
+      "description": "These update types have no release timestamp to wait on.",
+      "matchUpdateTypes": ["lockFileMaintenance", "replacement", "pin", "bump", "lockfileUpdate", "rollback"],
+      "minimumReleaseAge": null
+    },
+    {
+      "description": "Merge stable minor, patch, pin and digest updates after CI passes; repositories without CI keep them as PRs.",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true
+    }
+  ]
+}
